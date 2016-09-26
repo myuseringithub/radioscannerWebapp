@@ -219,8 +219,10 @@
 			</script>
 			<script>
 					var audio = new Audio();
+					// audio.crossOrigin = "anonymous";
+					audio.crossOrigin = 'anonymous';
 					// audio.src = '/shoutcast/;stream.mp3';
-					audio.src = 'http://localhost/stream';
+					audio.src = 'http://localhost:81/stream';
 					audio.controls = true;
 					audio.autoplay = true;
 					//  audio.crossOrigin = "by-anonymous";

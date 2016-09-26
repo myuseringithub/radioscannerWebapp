@@ -1,0 +1,21 @@
+version: "2"
+
+services:
+  nodejs:
+    build:
+      context: ./
+      dockerfile: nodejsWeb.dockerfile    
+    command: nodemon --debug=5858
+    volumes:
+      - ./root:/srv/projects/app/root
+      - ./nodeServer:/srv/projects/app/nodeServer
+    ports:
+      - "80:80"
+    links:
+      - "apachestreamproxy:apachestreamproxy"
+  apachestreamproxy:
+    build:
+      context: ./
+      dockerfile: apacheStreamServer.dockerfile
+    ports:
+      - "81:80"
