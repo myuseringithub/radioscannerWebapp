@@ -2,6 +2,6 @@
 
 Run App:
 
-cd projectDirectory
+  • cd projectDirectory
 
-(pushd . && cd ./VMs && vagrant up && popd)
+  • (pushd . && cd ./VMs && vagrant up && popd)
