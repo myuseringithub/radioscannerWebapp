@@ -4,7 +4,6 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "mocha \"../tests/**/*.js\" ",
     "start": "node server.js"
   },
   "keywords": [],
@@ -19,6 +18,5 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
-    "mocha": "^3.2.0"
   }
 }
