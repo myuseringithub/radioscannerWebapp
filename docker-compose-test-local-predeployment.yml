@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+
+  app:
+    # Build image using the folowing Dockerfile:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    # Name of the image to be built:
+    image: ImageName
+
+  test:
+    # get image from docker respiratory:
+    image: mhart/alpine-node:latest
+    # Where does it mount !>?
+    volumes:
+      # Volume attached to the host through docker-machine VM.
+      - .:/app
+    working_dir: /app/nodeServer
+    # Download dependencies & run tests.
+    command: bash -c "npm install && npm run test"
+
