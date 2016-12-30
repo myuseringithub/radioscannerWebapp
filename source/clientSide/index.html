@@ -1,0 +1,285 @@
+<!DOCTYPE HTML>
+<!--
+	Identity by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Radio Scanner</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+		@import url("http://fonts.googleapis.com/css?family=Roboto:300");
+		.play-button {
+		  height: 300px;
+		  width: 300px;
+		  display: block;
+		  margin: 60px auto;
+		  overflow: hidden;
+		  position: relative;
+			-webkit-user-select: none;  /* Chrome all / Safari all */
+			-moz-user-select: none;     /* Firefox all */
+			-ms-user-select: none;      /* IE 10+ */
+			user-select: none;          /* Likely future */
+			-webkit-tap-highlight-color:transparent;
+			-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+		}
+		.play-button:hover {
+			cursor: pointer;
+		}
+		.left {
+		  height: 99%;
+		  float: left;
+		  background-color: #48BECB;
+		  width: 36%;
+		  -webkit-transition: all 0.25s ease;
+		  transition: all 0.25s ease;
+		  overflow: hidden;
+		}
+		.triangle-1 {
+		  -webkit-transform: translate(0, -100%);
+		          transform: translate(0, -100%);
+		}
+		.triangle-2 {
+		  -webkit-transform: translate(0, 100%);
+		          transform: translate(0, 100%);
+		}
+		.triangle-1,
+		.triangle-2 {
+		  position: absolute;
+		  top: 0;
+		  right: 0;
+		  background-color: transparent;
+		  width: 0;
+		  height: 0;
+		  border-right: 300px solid #fff;
+		  border-top: 150px solid transparent;
+		  border-bottom: 150px solid transparent;
+		  -webkit-transition: -webkit-transform 0.25s ease;
+		  transition: -webkit-transform 0.25s ease;
+		  transition: transform 0.25s ease;
+		  transition: transform 0.25s ease, -webkit-transform 0.25s ease;
+		}
+		.right {
+		  height: 99%;
+		  float: right;
+		  width: 36%;
+		  background-color: #48BECB;
+		  -webkit-transition: all 0.25s ease;
+		  transition: all 0.25s ease;
+		}
+		.paused .left {
+		  width: 50%;
+		}
+		.paused .right {
+		  width: 50%;
+		}
+		.paused .triangle-1 {
+		  -webkit-transform: translate(0, -50%);
+		          transform: translate(0, -50%);
+		}
+		.paused .triangle-2 {
+		  -webkit-transform: translate(0, 50%);
+		          transform: translate(0, 50%);
+		}
+
+
+		#canvas1 {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			pointer-events:none;
+			overflow:hidden;
+			width: 100%;
+			-webkit-user-select: none;  /* Chrome all / Safari all */
+		  -moz-user-select: none;     /* Firefox all */
+		  -ms-user-select: none;      /* IE 10+ */
+		  user-select: none;          /* Likely future */
+			-webkit-tap-highlight-color:transparent;
+			-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+
+		}
+
+		</style>
+	</head>
+	<body class="is-loading">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<section id="main">
+						<header>
+							<span class="avatar"><img src="/images/avatar.png" alt="" /></span>
+							<h1>Radio Scanner</h1>
+							<p>Social Radio Tunning.</p>
+						</header>
+						<!--
+						<hr />
+						<h2>Extra Stuff!</h2>
+						<form method="post" action="#">
+							<div class="field">
+								<input type="text" name="name" id="name" placeholder="Name" />
+							</div>
+							<div class="field">
+								<input type="email" name="email" id="email" placeholder="Email" />
+							</div>
+							<div class="field">
+								<div class="select-wrapper">
+									<select name="department" id="department">
+										<option value="">Department</option>
+										<option value="sales">Sales</option>
+										<option value="tech">Tech Support</option>
+										<option value="null">/dev/null</option>
+									</select>
+								</div>
+							</div>
+							<div class="field">
+								<textarea name="message" id="message" placeholder="Message" rows="4"></textarea>
+							</div>
+							<div class="field">
+								<input type="checkbox" id="human" name="human" /><label for="human">I'm a human</label>
+							</div>
+							<div class="field">
+								<label>But are you a robot?</label>
+								<input type="radio" id="robot_yes" name="robot" /><label for="robot_yes">Yes</label>
+								<input type="radio" id="robot_no" name="robot" /><label for="robot_no">No</label>
+							</div>
+							<ul class="actions">
+								<li><a href="#" class="button">Get Started</a></li>
+							</ul>
+						</form>
+						<hr />
+						-->
+						<div id="main-audio-player" style="display: none;">
+							<!-- <audio id="tunin" controls preload="auto" style="display: none;">
+								<source src="http://208.53.164.178:80/;" type="audio/mpeg">
+									<source src="http://198.178.123.14:8424/;" type="audio/mpeg">
+									Your browser does not support the audio element.
+							</audio> -->
+						</div>
+
+						<!-- <footer>
+							<ul class="icons">
+								<li><a href="#" class="fa-twitter">Twitter</a></li>
+								<li><a href="#" class="fa-instagram">Instagram</a></li>
+								<li><a href="#" class="fa-facebook">Facebook</a></li>
+							</ul>
+						</footer> -->
+						<span class="play-button" href="#">
+						  <div class="left"></div>
+						  <div class="right"></div>
+						  <div class="triangle-1"></div>
+						  <div class="triangle-2"></div>
+						</span>
+
+						<canvas id="canvas1" width="503.98" height="400"></canvas>
+
+						<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+						<script>
+						$('.play-button').click(function () {
+								$(this).toggleClass('paused');
+								if($(this).hasClass('paused')) {
+									audio.play();
+								} else {
+									audio.pause();
+									// document.getElementById('tunin').currentTime = 0;
+								}
+						});
+						//# sourceURL=pen.js
+						$('.play-button').toggleClass('paused');
+						</script>
+					</section>
+				<!-- Footer -->
+					<footer id="footer">
+						<ul class="copyright">
+							<li>Dr. Safi Zeidan Nassar    &copy; </li>
+							<li>2016</li>
+						</ul>
+					</footer>
+
+			</div>
+
+
+		<!-- Scripts -->
+			<!--[if lte IE 8]><script src="assets/js/respond.min.js"></script><![endif]-->
+			<script>
+				if ('addEventListener' in window) {
+					window.addEventListener('load', function() { document.body.className = document.body.className.replace(/\bis-loading\b/, ''); });
+					document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
+				}
+			</script>
+			<script>
+					var audio = new Audio();
+					// audio.crossOrigin = "anonymous";
+					audio.crossOrigin = 'anonymous';
+					// audio.src = '/shoutcast/;stream.mp3';
+					audio.src = 'http://localhost:81/stream';
+					audio.controls = true;
+					audio.autoplay = true;
+					//  audio.crossOrigin = "by-anonymous";
+
+
+
+					document.getElementById('main-audio-player').appendChild(audio);
+					var len = 51;
+
+					var context = new AudioContext();
+					var analyser = context.createAnalyser();
+					var bufferLength = len;
+					var dataArray = new Uint8Array(bufferLength);
+
+					window.addEventListener('load', function(e) {
+					}, 100);
+
+					audio.addEventListener('canplaythrough', function() {
+							// Our <audio> element will be the audio source.
+							var source = context.createMediaElementSource(audio);
+							source.connect(analyser);
+							analyser.connect(context.destination);
+
+							analyser.smoothingTimeConstant = 0.6;
+							analyser.fftsize = len;
+
+							draw();
+					}, 100);
+
+					var canvas = document.getElementById( 'canvas1' );
+					var rectWidth = 5;
+					var ctx = canvas.getContext( '2d' );
+
+					// canvas.width = window.innerWidth;
+					canvas.width = 504;
+					var canvasWidth = canvas.width;
+					var canvasHeight = canvas.height;
+
+					var draw = function() {
+					    var offset = 0;
+					    analyser.getByteFrequencyData( dataArray );
+
+					    // Sum frequency amplitudes
+					    ctx.clearRect( 0, 0, canvasWidth, canvasHeight );
+					    ctx.fillStyle = '#CAA4A9';
+					    for ( var i = 0; i < bufferLength; i++ ) {
+					      ctx.fillRect(
+					          offset,
+					          canvasHeight - (dataArray[i] * 0.5),
+					          rectWidth,
+					          dataArray[i] * 0.5
+					      );
+					      offset += 10;
+					    }
+
+					    requestAnimationFrame( draw );
+					};
+			</script>
+	</body>
+</html>

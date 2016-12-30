@@ -1,0 +1,6 @@
+FROM httpd
+# replace this with your application's default port
+WORKDIR /usr/local/apache2/conf/
+
+COPY ./source/serverSide/apacheConf/httpd.conf /usr/local/apache2/conf/httpd.conf
+# COPY ./root/ /usr/local/apache2/htdocs/
