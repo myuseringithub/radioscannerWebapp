@@ -1,14 +1,16 @@
 version: "2"
 
+# USAGE (cd to project root): docker-compose -f ./setup/<docker-compose>.yml up 
 services:
   nodejs:
     build:
+      # Context of docker file that will be executed.
       context: ../
       dockerfile: ./setup/nodejsWeb.dockerfile    
     command: nodemon --debug=5858
+    # Relative to this file path, not the dockerfile context.
     volumes:
-      - ./source/clientSide:/srv/projects/app/source/clientSide
-      - ./source/serverSide:/srv/projects/app/source/serverSide/nodeServer
+      - ../source/:/app/source/
     ports:
       - "80:80"
     links:
