@@ -13,6 +13,8 @@ RUN npm install --yes \
      && npm ls \
      && npm install -g nodemon \
      && mv /app/source/serverSide/nodeServer/node_modules /app/node_modules 
+    # npm install with prefix can be used to specify destination folder for node_modules:
+    # npm install --prefix <path/to/prefix_folder> -g
 
 # RUN apt-get -y update && apt-get -y upgrade
 CMD node /app/source/serverSide/nodeServer/server.js
