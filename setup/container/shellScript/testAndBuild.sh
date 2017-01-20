@@ -9,6 +9,6 @@ npm install
 npm run test
 
 # build app for production.
-cd ../build
+cd ./setup/build
 npm install
 npm run build

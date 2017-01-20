@@ -2,22 +2,25 @@ version: "2"
 
 # USAGE (cd to project root): docker-compose -f ./setup/<docker-compose>.yml up 
 services:
+
   nodejs:
     build:
       # Context of docker file that will be executed.
-      context: ../
-      dockerfile: ./setup/nodejsWeb.dockerfile    
+      context: ../../
+      dockerfile: ./setup/container/nodejsServer.dockerfile    
     command: nodemon --debug=5858
     # Relative to this file path, not the dockerfile context.
     volumes:
-      - ../source/:/app/source/
+      - ../../source/:/app/source/
     ports:
-      - "80:80"
+      - "8084:80"
     links:
       - "apachestreamproxy:apachestreamproxy"
+  
   apachestreamproxy:
     build:
-      context: ../
-      dockerfile: ./setup/apacheStreamServer.dockerfile
+      context: ../../
+      dockerfile: ./setup/container/apacheStreamServer.dockerfile
+    # network_mode: "host"
     ports:
-      - "81:80"
+      - "8085:80"
