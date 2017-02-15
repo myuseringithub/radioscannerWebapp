@@ -1,4 +1,4 @@
-version: "2"
+version: "2.1"
 
 # USAGE (cd to project root): docker-compose -f ./setup/<docker-compose>.yml up 
 services:
@@ -7,7 +7,8 @@ services:
     build:
       # Context of docker file that will be executed.
       context: ../../
-      dockerfile: ./setup/container/nodejsServer.dockerfile    
+      dockerfile: ./setup/container/nodejsServer.dockerfile
+    image: myuserindocker/radioscanner-webapp-nodejs:latest
     command: nodemon --debug=5858
     # Relative to this file path, not the dockerfile context.
     volumes:
@@ -21,6 +22,7 @@ services:
     build:
       context: ../../
       dockerfile: ./setup/container/apacheStreamServer.dockerfile
+    image: myuserindocker/radioscanner-webapp-apachestreamproxy:latest
     # network_mode: "host"
-    ports:
-      - "8085:80"
+    # ports:
+    #   - "8085:80"
