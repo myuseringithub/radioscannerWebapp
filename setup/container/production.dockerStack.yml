@@ -1,9 +1,9 @@
-version: '3'
+version: '3.3'
 
 networks: 
   default:
     external: false
-  proxy_default:
+  proxy:
     external: true
 
 services:
@@ -19,7 +19,7 @@ services:
         delay: 10s
     networks:
       - default
-      - proxy_default
+      - proxy
 
   apachestreamproxy:
     image: myuserindocker/radioscanner-webapp-apachestreamproxy:latest
@@ -32,4 +32,4 @@ services:
         delay: 10s
     networks:
       - default
-      - proxy_default
+      - proxy
