@@ -1,13 +1,25 @@
 // This file would be required in Redbird reverseProxy. 
 // USAGE: 
 
-module.exports = function reverseProxy(proxy) {
+module.exports = function reverseProxy() {
 
-    // let email = process.env.EMAIL
-    let domainWebUI = 'radioscanner.webapp.run'
-    let domainStream = 'stream.radioscanner.webapp.run'
+    let containerGroupName = 'radioscannerwebapp'
+    let domain = 'webapp.run'
 
-    proxy.register(domainWebUI, 'http://radioscannerwebapp_nodejs:80');
-    proxy.register(domainStream, 'http://radioscannerwebapp_apachestreamproxy/:80');
-        
+    let proxyConfig = [
+        { // web ui
+            domain: domain,
+            subdomain: 'radioscanner',
+            containerRoute: `http://${containerGroupName}_nodejs:80`,
+            ssl: false
+        },
+        { // stream
+            domain: domain,
+            subdomain: 'stream.radioscanner',
+            containerRoute: `http://${containerGroupName}_apachestreamproxy:80`,
+            ssl: false
+        },
+    ]
+
+    return proxyConfig
 }
