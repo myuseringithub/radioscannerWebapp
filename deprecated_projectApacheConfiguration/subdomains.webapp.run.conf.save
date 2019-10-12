@@ -1,0 +1,145 @@
+
+# http://serverfault.com/questions/567320/difference-between-default-and-in-virtualhost-context
+# This configuration uses "name based virtualhosting"
+# Redirect all port 80 requests to https.
+<VirtualHost *:80>
+    ServerName other.webapp.run
+    ServerAlias *dev.webapp.run
+    Redirect permanent / https://%-3.webapp.run/
+
+    Include /etc/apache2/sites-available/security-settings.conf
+    Include /etc/apache2/sites-available/response-headers.conf
+</VirtualHost>
+
+# configure Apache to listen upon the SSL port (443)
+
+<IfModule mod_ssl.c>
+    <VirtualHost *:443>
+        ServerAdmin webmaster@localhost
+        ServerName other.webapp.run
+        ServerAlias *dev.webapp.run
+
+        UseCanonicalName Off
+        VirtualDocumentRoot /var/www/subdomains.webapp.run/development/%-3/app/
+        DocumentRoot /var/www/subdomains.webapp.run/development/
+
+        # Reference the uploads folder in your Documents
+        # AliasMatch ^/content/uploads/(.*) /var/www/wordpress/content/uploads/$1
+        # Reference the mu-plugins folder in your Documents
+        # AliasMatch ^/content/mu-plugins/(.*) /var/www/wordpress/content/mu-plugins/$1
+        # Possible values include: debug, info, notice, warn, error, crit,
+        # alert, emerg.
+        LogLevel warn
+        ErrorLog ${APACHE_LOG_DIR}/subdomains.webapp.run.error.log
+        CustomLog ${APACHE_LOG_DIR}/subdomains.webapp.run.access.log combined
+        
+        SSLEngine on
+        SSLCertificateFile /etc/apache2/ssl/webapp.run/webapp.combined.crt
+        SSLCertificateKeyFile /etc/apache2/ssl/webapp.run/webapp.key
+        # SSLCertificateChainFile /etc/apache2/ssl/webapp.run/sf_bundle-g2-g1.crt
+
+        # <Files "/var/www/dentrist.com/config/wordpress.php">order allow,deny deny from all</Files>
+        # <Files "/var/www/dentrist.com/public/.htaccess">order allow,deny deny from all</Files>
+        
+        <FilesMatch "\.(cgi|shtml|phtml|php)$">
+            SSLOptions +StdEnvVars
+        </FilesMatch>
+
+        <Directory />
+            SSLRequireSSL
+            Options FollowSymLinks
+            AllowOverride None
+        </Directory>
+
+        <Directory /var/www/subdomains.webapp.run/development/>
+            Options Indexes FollowSymLinks MultiViews
+            AllowOverride All
+            Order allow,deny
+            allow from all
+        </Directory>
+
+        ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
+        <Directory /usr/lib/cgi-bin>
+            AllowOverride None
+            Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+            Order allow,deny
+            Allow from all
+            SSLOptions +StdEnvVars
+        </Directory>
+        BrowserMatch "MSIE [2-6]" \
+            nokeepalive ssl-unclean-shutdown \
+            downgrade-1.0 force-response-1.0
+        BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
+
+        Include /etc/apache2/sites-available/security-settings.conf
+        Include /etc/apache2/sites-available/response-headers.conf
+    </VirtualHost>
+</IfModule>
+
+
+<IfModule mod_ssl.c>
+    <VirtualHost *:443>
+        ServerAdmin webmaster@localhost
+        ServerName dev.webapp.run
+        ServerAlias *.webapp.run
+        
+        UseCanonicalName Off
+        VirtualDocumentRoot /var/www/subdomains.webapp.run/deployment/%-3
+
+        DocumentRoot /var/www/subdomains.webapp.run/deployment/
+        
+        # Reference the uploads folder in your Documents
+        # AliasMatch ^/content/uploads/(.*) /var/www/wordpress/content/uploads/$1
+        # Reference the mu-plugins folder in your Documents
+        # AliasMatch ^/content/mu-plugins/(.*) /var/www/wordpress/content/mu-plugins/$1
+        # Possible values include: debug, info, notice, warn, error, crit,
+        # alert, emerg.
+        LogLevel warn
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+        
+        SSLEngine on
+        SSLCertificateFile /etc/apache2/ssl/webapp.run/82fae5654fcac962.crt
+        SSLCertificateKeyFile /etc/apache2/ssl/webapp.run/webapp.key
+        SSLCertificateChainFile /etc/apache2/ssl/webapp.run/sf_bundle-g2-g1.crt
+
+        Include /etc/apache2/sites-available/response-headers.conf
+        # <Files "/var/www/dentrist.com/config/wordpress.php">order allow,deny deny from all</Files>
+        # <Files "/var/www/dentrist.com/public/.htaccess">order allow,deny deny from all</Files>
+        
+        <FilesMatch "\.(cgi|shtml|phtml|php)$">
+            SSLOptions +StdEnvVars
+        </FilesMatch>
+        
+        <Directory />
+            SSLRequireSSL
+            Options FollowSymLinks
+            AllowOverride None
+        </Directory>
+        
+        <Directory /var/www/subdomains.webapp.run/deployment/>
+            Options Indexes FollowSymLinks MultiViews
+            AllowOverride All
+            Order allow,deny
+            allow from all
+        </Directory>
+        
+        ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
+        <Directory /usr/lib/cgi-bin>
+            AllowOverride None
+            Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+            Order allow,deny
+            Allow from all
+            SSLOptions +StdEnvVars
+        </Directory>
+        
+        BrowserMatch "MSIE [2-6]" \
+            nokeepalive ssl-unclean-shutdown \
+            downgrade-1.0 force-response-1.0
+        BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
+        
+        Include /etc/apache2/sites-available/security-settings.conf
+        Include /etc/apache2/sites-available/response-headers.conf
+    </VirtualHost>
+</IfModule>
+

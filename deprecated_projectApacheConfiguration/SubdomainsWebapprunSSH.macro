@@ -1,0 +1,7 @@
+<Macro SubdomainsWebapprunSSH>
+	SSLEngine on
+	SSLCertificateFile /etc/apache2/ssl/webapp.run/82fae5654fcac962.crt
+	SSLCertificateKeyFile /etc/apache2/ssl/webapp.run/webapp.key
+	SSLCertificateChainFile /etc/apache2/ssl/webapp.run/sf_bundle-g2-g1.crt
+	Include /etc/apache2/sites-available/sharedConfigurations/shared-settings.conf
+</Macro>

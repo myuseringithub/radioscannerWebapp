@@ -1,0 +1,7 @@
+<Macro SubdomainsWebapprunLOG $subdomain>
+	# Possible values include: debug, info, notice, warn, error, crit,
+	# alert, emerg.
+	LogLevel warn
+	ErrorLog ${APACHE_LOG_DIR}/$subdomain.webapp.run.error.log
+	CustomLog ${APACHE_LOG_DIR}/$subdomain.webapp.run.access.log combined
+</Macro>
