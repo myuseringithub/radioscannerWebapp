@@ -1,10 +1,8 @@
-version: '3.3'
+version: '3.7'
 
 networks: 
-  default:
+  internal:
     external: false
-  proxy:
-    external: true
 
 services:
 
@@ -12,14 +10,15 @@ services:
     image: myuserindocker/radioscanner-webapp-nodejs:latest
     environment:
       DEPLOYMENT: production
+    ports: 
+      - 80:80
     deploy:
       replicas: 1
       update_config:
         parallelism: 1
         delay: 10s
     networks:
-      - default
-      - proxy
+      - internal
 
   apachestreamproxy:
     image: myuserindocker/radioscanner-webapp-apachestreamproxy:latest
@@ -31,5 +30,4 @@ services:
         parallelism: 1
         delay: 10s
     networks:
-      - default
-      - proxy
+      - internal

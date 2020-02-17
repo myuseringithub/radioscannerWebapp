@@ -2,9 +2,10 @@
   "name": "nodeServer",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "./source/server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node ./",
+    "build": "gulp --gulpfile ./configuration/build/gulpfile.js"
   },
   "keywords": [],
   "author": "",
@@ -18,5 +19,8 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
+    "mocha": "latest",
+    "gulp": "^3.9.1"
+
   }
 }

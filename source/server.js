@@ -4,7 +4,7 @@ var http = require('http');
 var request = require('request');
 var app = express();
 
-app.use('/', express.static(__dirname + '/../../clientSide/'));
+app.use('/', express.static(__dirname + '/clientSide/'));
 app.listen(80, function() {
-    console.log('SZN - listening on port 80.')
+    console.log('• Listening on port 80.')
 });

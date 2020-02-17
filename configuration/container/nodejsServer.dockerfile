@@ -1,6 +1,6 @@
 # USAGE: 
 # current directory = root folder of app (serves as context of docker build).
-# docker build -t <imagename> -f setup/nodejsWeb.dockerfile ./
+# docker build -t <imagename> -f configuration/container/nodejsWeb.dockerfile ./
 # docker run -d -p 80:80 <imagename>
 FROM node
 # Doesn't make it exposed to host. for that use -p flag .

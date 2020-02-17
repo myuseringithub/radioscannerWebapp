@@ -6,7 +6,7 @@ services:
     # Build image using the folowing Dockerfile:
     build: 
       context: ../../
-      dockerfile: ./setup/container/Dockerfile
+      dockerfile: ./configuration/container/Dockerfile
     # Name of the image to be built:
     image: ImageName
   
@@ -19,7 +19,7 @@ services:
       # Volume attached to the host through docker-machine VM.
       - ../../:/app
     # entrypoint allows cd command to work, in command: bash it doesn't.
-    entrypoint: "/app/setup/container/shellScript/testAndBuild.sh"
+    entrypoint: "/app/configuration/container/shellScript/testAndBuild.sh"
     working_dir: /app
     # use /bin/sh where bash is not installed (i.e. alpine-node image). Installed bash to the default image.
     # command: bash -c ""

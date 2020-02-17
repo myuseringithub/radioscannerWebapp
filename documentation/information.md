@@ -1,8 +1,8 @@
-# webapp-radioscanner
+# Radio Scanner WebApp
 
 Run App:
   • cd project root
-  • ./setup/run.sh production
+  • ./script/run.sh production
 
 Old
   • cd projectDirectory
