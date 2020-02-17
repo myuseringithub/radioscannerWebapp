@@ -2,7 +2,7 @@
 - Simple Nodejs app, playing streamed media using web audio API. 
 - A stream service (Apache proxy) proxies media stream from a Shoutcast server.
 
-![Screencast](/documentation/screenshot.PNG)
+![Screencast](/documentation/screenshot.jpg)
 
 
 # Deployment
